@@ -20,7 +20,7 @@ async function getSiteHtml(url: string) {
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
   const page = await browser.newPage();
-  await page.goto(url, { waitUntil: "domcontentloaded" });
+  await page.goto(url);
   var result = await page.content();
   browser.close();
 
@@ -64,6 +64,7 @@ export default {
     try {
       await (async () => {
         var ali$ = load(await getSiteHtml(aliUrl));
+        console.log(ali$.html());
         var search_results = ali$('[class="_1KpBb"]');
         search_results = search_results.slice(0, 10);
         console.log(`Ali Results: ${search_results.length}`);

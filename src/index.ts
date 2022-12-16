@@ -32,7 +32,7 @@ app.get("/compare", async (req, res) => {
   var searchTerm: string = req.query.search!.toString();
   console.log(`Search Term:${searchTerm}`);
   if (searchTerm == undefined) res.send({ result: "Empty search term" });
-  let amazon = await selenium_handler.amazonResults(searchTerm!);
+  let amazon = await selenium_handler.aliResults(searchTerm!);
   /*   let [ali, amazon, ebay] = await Promise.all([
     selenium_handler.aliResults(searchTerm!),
     selenium_handler.amazonResults(searchTerm!),
