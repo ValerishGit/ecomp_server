@@ -40,8 +40,8 @@ export default {
     try {
       await (async () => {
         var amazon$ = load(await getSiteHtml(amazonUrl));
+        console.log("Site Loaded");
         var search_results = amazon$(AMAZON_PARENT_CLASS);
-        search_results = search_results.slice(0, 10);
         console.log(`Amazon Results: ${search_results.length}`);
         products = await getProductsAmazon(search_results, amazon$);
       })().catch((err) => console.error(err));
