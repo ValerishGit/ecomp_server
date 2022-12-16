@@ -16,7 +16,9 @@ const ALI_PARENT_CLASS = "_1lP57 _2f4Ho";
 const ALI_IMAGE_CLASS = "_36QXb product-img";
 
 async function getSiteHtml(url: string) {
-  var browser = await puppeteer.launch();
+  var browser = await puppeteer.launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: "domcontentloaded" });
   var result = await page.content();

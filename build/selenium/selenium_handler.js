@@ -15,9 +15,11 @@ const ALI_TITLE_CLASS = "_24F0J Vgu6S";
 const ALI_PARENT_CLASS = "_1lP57 _2f4Ho";
 const ALI_IMAGE_CLASS = "_36QXb product-img";
 async function getSiteHtml(url) {
-    var browser = await puppeteer_1.default.launch();
+    var browser = await puppeteer_1.default.launch({
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
     const page = await browser.newPage();
-    await page.goto(url, { waitUntil: "domcontentloaded" });
+    await page.goto(url);
     var result = await page.content();
     browser.close();
     return result;
@@ -34,8 +36,8 @@ exports.default = {
         try {
             await (async () => {
                 var amazon$ = (0, cheerio_1.load)(await getSiteHtml(amazonUrl));
+                console.log("Site Loaded");
                 var search_results = amazon$(AMAZON_PARENT_CLASS);
-                search_results = search_results.slice(0, 10);
                 console.log(`Amazon Results: ${search_results.length}`);
                 products = await getProductsAmazon(search_results, amazon$);
             })().catch((err) => console.error(err));

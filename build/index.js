@@ -30,57 +30,31 @@ app.get("/compare", async (req, res) => {
     console.log(`Search Term:${searchTerm}`);
     if (searchTerm == undefined)
         res.send({ result: "Empty search term" });
-    let [ali, amazon, ebay] = await Promise.all([
-        selenium_handler_1.default.aliResults(searchTerm),
-        selenium_handler_1.default.amazonResults(searchTerm),
-        selenium_handler_1.default.ebayResults(searchTerm),
-    ]);
+    let amazon = await selenium_handler_1.default.amazonResults(searchTerm);
+    /*   let [ali, amazon, ebay] = await Promise.all([
+      selenium_handler.aliResults(searchTerm!),
+      selenium_handler.amazonResults(searchTerm!),
+      selenium_handler.ebayResults(searchTerm!),
+    ]); */
     res.send([
         {
             name: "Amazon",
             products: amazon,
             cheap: amazon[0],
         },
-        {
-            name: "AliExpress",
-            products: ali,
-            cheap: ali[0],
+        /*     {
+          name: "AliExpress",
+          products: ali,
+          cheap: ali[0],
         },
         {
-            name: "Ebay",
-            products: ebay,
-            cheap: ebay[0],
-        },
-    ]);
-});
-app.get("/compare_2", async (req, res) => {
-    var searchTerm = req.query.search?.toString();
-    if (!searchTerm)
-        res.send({ result: "Empty search term" });
-    let [ebay, ali, amazon] = await Promise.all([
-        selenium_handler_1.default.ebayResults(searchTerm),
-        selenium_handler_1.default.aliResults(searchTerm),
-        selenium_handler_1.default.amazonResults(searchTerm),
-    ]);
-    res.send([
-        {
-            name: "Amazon",
-            products: amazon,
-            cheap: amazon[0],
-        },
-        {
-            name: "Ali",
-            products: ali,
-            cheap: ali[0],
-        },
-        {
-            name: "Ebay",
-            products: ebay,
-            cheap: ebay[0],
-        },
+          name: "Ebay",
+          products: ebay,
+          cheap: ebay[0],
+        }, */
     ]);
 });
 // starting the server
-app.listen(process.env.PORT, () => {
-    console.log(`listening on port ${process.env.PORT}`);
+app.listen(process.env.PORT || 3001, () => {
+    console.log(`listening on port ${process.env.PORT || 3001}`);
 });
