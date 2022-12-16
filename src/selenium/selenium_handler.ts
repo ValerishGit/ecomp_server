@@ -25,9 +25,13 @@ async function getSiteHtml(url: string) {
   return result;
 }
 
+var replaceAll = function (target: string): string {
+  return target.replace(" ", "+");
+};
+
 export default {
   amazonResults: async function (searchTerm: string): Promise<Product[]> {
-    searchTerm = searchTerm.replaceAll(" ", "+");
+    searchTerm = replaceAll(searchTerm);
     var amazonUrl = `https://www.amazon.com/s?k=${searchTerm}`;
 
     console.log(`Searching ${searchTerm} on Amazon`);
@@ -46,7 +50,7 @@ export default {
     }
   },
   aliResults: async function (searchTerm: string): Promise<Product[]> {
-    searchTerm = searchTerm.replaceAll(" ", "+");
+    searchTerm = replaceAll(searchTerm);
     var aliUrl = `https://www.aliexpress.com/wholesale?SearchText=${searchTerm}&ltype=wholesale&SortType=default&g=y&CatId=0`;
 
     console.log(`Searching ${searchTerm} on Ali`);
@@ -65,7 +69,7 @@ export default {
     }
   },
   ebayResults: async function (searchTerm: string): Promise<Product[]> {
-    searchTerm = searchTerm.replaceAll(" ", "+");
+    searchTerm = replaceAll(searchTerm);
     console.log(`Searching ${searchTerm} on Ebay`);
     var ebayURL = `https://www.ebay.com/sch/i.html?_nkw=${searchTerm}`;
     var products: Product[] = [];
