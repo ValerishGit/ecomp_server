@@ -24,7 +24,9 @@ app.use(cors({ origin: "*" }));
 app.use(morgan("combined"));
 
 // defining an endpoint to return all ads
-app.get("/", (req, res) => {});
+app.get("/", (req, res) => {
+  res.send(200);
+});
 
 app.get("/compare", async (req, res) => {
   var searchTerm: string | undefined = req.query.search?.toString();
