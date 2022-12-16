@@ -22,9 +22,12 @@ async function getSiteHtml(url) {
     browser.close();
     return result;
 }
+var replaceAll = function (target) {
+    return target.replace(" ", "+");
+};
 exports.default = {
     amazonResults: async function (searchTerm) {
-        searchTerm = searchTerm.replaceAll(" ", "+");
+        searchTerm = replaceAll(searchTerm);
         var amazonUrl = `https://www.amazon.com/s?k=${searchTerm}`;
         console.log(`Searching ${searchTerm} on Amazon`);
         var products = [];
@@ -42,7 +45,7 @@ exports.default = {
         }
     },
     aliResults: async function (searchTerm) {
-        searchTerm = searchTerm.replaceAll(" ", "+");
+        searchTerm = replaceAll(searchTerm);
         var aliUrl = `https://www.aliexpress.com/wholesale?SearchText=${searchTerm}&ltype=wholesale&SortType=default&g=y&CatId=0`;
         console.log(`Searching ${searchTerm} on Ali`);
         var products = [];
@@ -60,7 +63,7 @@ exports.default = {
         }
     },
     ebayResults: async function (searchTerm) {
-        searchTerm = searchTerm.replaceAll(" ", "+");
+        searchTerm = replaceAll(searchTerm);
         console.log(`Searching ${searchTerm} on Ebay`);
         var ebayURL = `https://www.ebay.com/sch/i.html?_nkw=${searchTerm}`;
         var products = [];

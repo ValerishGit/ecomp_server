@@ -22,9 +22,12 @@ app.use((0, cors_1.default)({ origin: "*" }));
 // adding morgan to log HTTP requests
 app.use((0, morgan_1.default)("combined"));
 // defining an endpoint to return all ads
-app.get("/", (req, res) => { });
+app.get("/", (req, res) => {
+    res.send(200);
+});
 app.get("/compare", async (req, res) => {
-    var searchTerm = req.query.search?.toString();
+    var searchTerm = req.query.search.toString();
+    console.log(`Search Term:${searchTerm}`);
     if (searchTerm == undefined)
         res.send({ result: "Empty search term" });
     let [ali, amazon, ebay] = await Promise.all([
@@ -78,6 +81,6 @@ app.get("/compare_2", async (req, res) => {
     ]);
 });
 // starting the server
-app.listen(3001, () => {
-    console.log("listening on port 3001");
+app.listen(process.env.PORT, () => {
+    console.log(`listening on port ${process.env.PORT}`);
 });
