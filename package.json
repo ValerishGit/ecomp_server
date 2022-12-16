@@ -25,7 +25,7 @@
     "nodemon": "^2.0.20",
     "phantom": "^6.3.0",
     "pretty": "^2.0.0",
-    "puppeteer": "^19.4.0",
+    "puppeteer": "^18.2.1",
     "request": "^2.88.2",
     "selenium-webdriver": "^4.7.0"
   },
