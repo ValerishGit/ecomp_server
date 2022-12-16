@@ -32,11 +32,12 @@ app.get("/compare", async (req, res) => {
   var searchTerm: string = req.query.search!.toString();
   console.log(`Search Term:${searchTerm}`);
   if (searchTerm == undefined) res.send({ result: "Empty search term" });
-  let [ali, amazon, ebay] = await Promise.all([
+  let amazon = await selenium_handler.amazonResults(searchTerm!);
+  /*   let [ali, amazon, ebay] = await Promise.all([
     selenium_handler.aliResults(searchTerm!),
     selenium_handler.amazonResults(searchTerm!),
     selenium_handler.ebayResults(searchTerm!),
-  ]);
+  ]); */
 
   res.send([
     {
@@ -44,7 +45,7 @@ app.get("/compare", async (req, res) => {
       products: amazon,
       cheap: amazon[0],
     },
-    {
+    /*     {
       name: "AliExpress",
       products: ali,
       cheap: ali[0],
@@ -53,7 +54,7 @@ app.get("/compare", async (req, res) => {
       name: "Ebay",
       products: ebay,
       cheap: ebay[0],
-    },
+    }, */
   ]);
 });
 
@@ -73,7 +74,7 @@ app.get("/compare_2", async (req, res) => {
       products: amazon,
       cheap: amazon[0],
     },
-    {
+    /*     {
       name: "Ali",
       products: ali,
       cheap: ali[0],
@@ -82,7 +83,7 @@ app.get("/compare_2", async (req, res) => {
       name: "Ebay",
       products: ebay,
       cheap: ebay[0],
-    },
+    }, */
   ]);
 });
 
