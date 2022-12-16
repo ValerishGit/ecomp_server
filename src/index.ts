@@ -58,35 +58,6 @@ app.get("/compare", async (req, res) => {
   ]);
 });
 
-app.get("/compare_2", async (req, res) => {
-  var searchTerm: string | undefined = req.query.search?.toString();
-  if (!searchTerm) res.send({ result: "Empty search term" });
-
-  let [ebay, ali, amazon] = await Promise.all([
-    selenium_handler.ebayResults(searchTerm!),
-    selenium_handler.aliResults(searchTerm!),
-    selenium_handler.amazonResults(searchTerm!),
-  ]);
-
-  res.send([
-    {
-      name: "Amazon",
-      products: amazon,
-      cheap: amazon[0],
-    },
-    /*     {
-      name: "Ali",
-      products: ali,
-      cheap: ali[0],
-    },
-    {
-      name: "Ebay",
-      products: ebay,
-      cheap: ebay[0],
-    }, */
-  ]);
-});
-
 // starting the server
 app.listen(process.env.PORT, () => {
   console.log(`listening on port ${process.env.PORT}`);
