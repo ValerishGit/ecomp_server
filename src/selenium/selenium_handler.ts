@@ -42,11 +42,14 @@ export default {
     try {
       await (async () => {
         var amazon$ = load(await getSiteHtml(amazonUrl));
+        console.log(amazon$.html());
         console.log("Site Loaded");
         var search_results = amazon$(AMAZON_PARENT_CLASS);
         console.log(`Amazon Results: ${search_results.length}`);
         products = await getProductsAmazon(search_results, amazon$);
       })().catch((err) => console.error(err));
+    } catch (e) {
+      console.log(e);
     } finally {
       return products ?? [];
     }
